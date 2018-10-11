@@ -16,5 +16,8 @@ class User < ApplicationRecord
   has_many :friends_relationship, foreign_key: 'user_id' , class_name: 'Friendship' , dependent: :destroy
   has_many :friends, through: :friends_relationship, source: :user
 
+  has_many :posts
+  has_many :likes
+
   
 end
