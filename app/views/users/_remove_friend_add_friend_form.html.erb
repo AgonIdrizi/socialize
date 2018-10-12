@@ -1,0 +1,7 @@
+ <div id='remove_friend_add_friend_form'>
+ <% if current_user.friends_relationship.find_by(user_id: @user.id).present? %>
+  <%= render partial: 'users/remove_friend' %>
+<% else %>
+  <%= render partial: 'users/add_friend' %>
+<% end %>
+</div>

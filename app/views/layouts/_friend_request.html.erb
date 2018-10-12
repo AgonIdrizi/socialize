@@ -3,33 +3,33 @@
                 id="dropdownMenuButton" 
                 data-toggle="dropdown" 
                 aria-haspopup="true" 
-                aria-expanded="false">
+                aria-expanded="true">
       <%= icon('fas', 'envelope')  %> Friend Requests
     </a>
-    <div class="dropdown-menu-friend-request dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <% if current_user.received_friend_requests.blank? %>
+    <div class="dropdown-menu-friend-request  dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% if current_user.friend_requests_received.blank? %>
         <div class="dropdown-item">
           <h6 class="center"> You currently have no requests </h5>
         </div>
       <% else %>
-        <% current_user.received_friend_requests.limit(10).each do |rq| %>
+        <% current_user.friend_requests_received.limit(10).each do |sender| %>
           <div class="dropdown-item-friend-request dropdown-item">
             <div class="sender-name">
-              <%= link_to rq.sender.shorten_name(12), user_path(rq.sender) %>
+              <%= link_to sender.name , user_path(sender) %>
             </div>
             <div class="request-dropdown-button-wrapper">
               <div class="request-dropdown-ignore dropdown-btn">
                   <%= button_to "Ignore", 
-                      friend_request_path(rq),
-                      :params => { :id => rq.id },
+                      request_path(sender),
+                      :params => { :sender_id => sender.id },
                       method: :delete,
                       class: 'btn btn-light btn-sm ignore' %>
                 </div>
               <div class="request-dropdown-accept dropdown-btn">
                 <%= button_to "Accept",
-                    friend_request_path(rq), 
-                    :params => { :id => rq.id },
-                    method: :put, 
+                    friendships_path, 
+                    :params => { :user_id => sender.id },
+                    method: :post, 
                     class: 'btn btn-primary btn-sm accept' %>
               </div>
             </div>
@@ -38,7 +38,7 @@
       <% end %>
       <div class="dropdown-divider-special dropdown-divider"></div>
       <div class="showall">
-        <%= link_to 'Show All', friend_requests_path, class: "showall-text" %>
+        <%= link_to 'Show All', requests_path, class: "showall-text" %>
       </div>
     </div>
 </li>

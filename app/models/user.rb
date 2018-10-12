@@ -13,11 +13,12 @@ class User < ApplicationRecord
   has_many :friend_requests_received, through: :friend_requests_received_relationship, source: :sender
 
 
-  has_many :friends_relationship, foreign_key: 'user_id' , class_name: 'Friendship' , dependent: :destroy
+  has_many :friends_relationship, foreign_key: 'friend_id' , class_name: 'Friendship' , dependent: :destroy
   has_many :friends, through: :friends_relationship, source: :user
 
   has_many :posts
   has_many :likes
+  has_many :comments
 
   
 end

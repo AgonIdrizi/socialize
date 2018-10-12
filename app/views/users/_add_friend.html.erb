@@ -1,0 +1,4 @@
+  <%= form_for( current_user.friend_requests_sent_relationship.build, remote: true) do |f| %>
+    <%= f.hidden_field :id, value: params[:id] %>
+    <%= f.submit "Add Friend", class: 'btn btn-primary add-button' %>
+  <% end %>
