@@ -1,0 +1,24 @@
+<% @friends.each do |friend| %>
+<% friend.posts.each do |post| %>
+  <%= post.user.name %></br>
+  <%= post.body %></br>
+  <%= post.likes.count %> Likes</br>
+  <%= link_to icon('fas', 'thumbs-up'), 
+                post_likes_path(post),method: :post%></br>
+   <%= form_for post.comments.build do |f| %>
+     <%= f.hidden_field :post_id, value: post.id %>
+   	 <%= f.label :body %></br>
+     <%= f.text_area :body %></br>
+     <%= f.submit 'Add Comment' %>
+   <% end %>
+   <p>Comment:</p>
+  <% post.comments.each do |comment| %></br>
+    
+    <%= comment.body %>
+    <% comment.comments.each do |sub_comment| %><br>
+      <p>Sub comment:</p>
+      <%= sub_comment.body %></br>
+    <% end %>
+  <% end %></br>
+<% end %>
+<% end %>

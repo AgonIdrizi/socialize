@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user! 
   def index
+    @friends = current_user.friends
+    
   	@posts = Post.all
   end
 
@@ -8,9 +11,16 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    @post = Post.new
+    if current_user.posts.create(post_params)
+      redirect_to posts_path
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -20,5 +30,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:body)
   end
 end
