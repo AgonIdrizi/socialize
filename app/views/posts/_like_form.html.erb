@@ -1,0 +1,8 @@
+<div id='likes_form<%=post.id%>'>
+  <%= post.likes.count %> Likes</br>
+  <% if post.likes.where(likeable_id: post.id, user_id: current_user.id).present? %>
+    <%= render partial: 'posts/unlike',locals: {post: post} %>
+  <% else %>
+    <%= render partial: 'posts/like',locals: {post: post} %>
+  <% end %>
+</div>

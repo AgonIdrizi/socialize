@@ -1,0 +1,3 @@
+<% post = post %>
+<%= link_to icon('fas', 'thumbs-up')+ 'Like', 
+                post_likes_path(post),:params => { :post_id => post.id },method: :post, remote: true%></br>
