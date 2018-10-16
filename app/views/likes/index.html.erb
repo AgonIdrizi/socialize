@@ -1,2 +1,3 @@
-<h1>Likes#index</h1>
-<p>Find me in app/views/likes/index.html.erb</p>
+<% @likes.each do |like| %>
+  <%= link_to like.user.name, user_path(like.user.id) %></br>
+<% end %>

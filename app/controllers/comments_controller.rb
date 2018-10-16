@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   def create
     
   	@comment = @commentable.comments.new(body: params[:comment][:body], user_id: current_user.id)
-    #byebug
+    byebug
     if @comment.save
       redirect_to posts_path
     else

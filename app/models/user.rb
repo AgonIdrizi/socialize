@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :likes
-  has_many :comments
+  has_many :comments, foreign_key: 'user_id', class_name: 'Comment'
 
   
 end
