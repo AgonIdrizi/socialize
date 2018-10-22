@@ -30,6 +30,7 @@ class User < ApplicationRecord
       token: params.credentials.token,
       name:  params.info.name 
       })
+    user
   end
 
 
