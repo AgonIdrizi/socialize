@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :friends, foreign_key: 'friend_id', class_name: 'Friendship' , dependent: :destroy
 
@@ -20,5 +20,33 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments, foreign_key: 'user_id', class_name: 'Comment'
 
+  has_one_attached :image
+
+  after_commit :add_default_cover, on: [:create, :update]
+
+  def self.create_from_omniauth(params)
+    user = find_or_create_by(email: params.info.email, uid: params.uid)
+    user.update({
+      token: params.credentials.token,
+      name: params.info.name,
+      image: params.info.image
+      })
+  end
+
+
+
   
+
+
+  private
+    
+
+    def add_default_cover
+      unless self.image.attached?
+        self.image.attach(io: File.open(Rails.root.join("app", "assets", "images", "default-picture.jpg")), filename: 'default-picture.jpg' , content_type: "image/jpg")
+      end
+    end
+
+
+
 end

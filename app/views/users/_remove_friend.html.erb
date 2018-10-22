@@ -1,5 +1,5 @@
   <div class="btn btn-static disabled">Friends</div></br>
-  <%= form_for(current_user.friends_relationship.find_by(user_id: @user.id), controller: 'Friendships', html: {method: :delete}, remote: true) do |f|%>
-  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= form_for(current_user.friends_relationship.find_by(user_id: user.id), controller: 'Friendships', html: {method: :delete}, remote: true) do |f|%>
+  <%= f.hidden_field :user_id, value: user.id %>
     <%= f.submit "Remove friend", class: 'btn' %>
   <% end %>

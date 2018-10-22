@@ -4,7 +4,8 @@ class RequestsController < ApplicationController
 	end
 
 	def create
-		current_user.friend_requests_sent_relationship.create(accepter_id: params[:user_id] )
+		@user = User.find_by(id: params[:request][:accepter_id])
+		current_user.friend_requests_sent_relationship.create(accepter_id: params[:request][:accepter_id] )
 		respond_to do |format|
 		format.js
 	  	format.html {redirect_to root_path}
@@ -13,10 +14,16 @@ class RequestsController < ApplicationController
 	end
 
 	def destroy
-	  request = Request.where(["sender_id = ? and accepter_id = ?", params[:sender_id], current_user.id])
-	  if request.destroy_all
-	  	redirect_to root_path
+		@user = User.find_by(id: params[:request][:id])
+	  request = Request.find_by(id: params[:id])
+	  if request.destroy
+	  	respond_to do |format|
+	  	format.html {redirect_to root_path}
+		format.js
+		end
 	  else
+	  
+	  
 	  end
 	end
 end

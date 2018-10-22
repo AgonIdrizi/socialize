@@ -1,5 +1,6 @@
 <% @friends.each do |friend| %>
 <% friend.posts.each do |post| %>
+  <p>Posted by:</p>
   <%= post.user.name %></br>
   <%= post.body %></br>
   

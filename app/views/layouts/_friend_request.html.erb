@@ -19,19 +19,23 @@
             </div>
             <div class="request-dropdown-button-wrapper">
               <div class="request-dropdown-ignore dropdown-btn">
-                  <%= button_to "Ignore", 
-                      request_path(sender),
-                      :params => { :sender_id => sender.id },
-                      method: :delete,
-                      class: 'btn btn-light btn-sm ignore' %>
-                </div>
-              <div class="request-dropdown-accept dropdown-btn">
-                <%= button_to "Accept",
-                    friendships_path, 
-                    :params => { :user_id => sender.id },
-                    method: :post, 
-                    class: 'btn btn-primary btn-sm accept' %>
-              </div>
+                 <% if current_user.friend_requests_received_relationship.find_by(sender_id: sender.id).present? && current_user.friends_relationship.find_by(user_id: sender.id).blank? %>
+                    <div class="show-image">
+                      <%= image_tag(url_for(sender.image.variant(resize: "50x50"))) if sender.image.attached?%>
+                    </div>
+                    <div class="accept-ignore">
+                    <%= button_to "Accept",
+                                          friendships_path, 
+                                          :params => { :user_id => sender.id },
+                                          method: :post, 
+                                          class: 'btn btn-primary btn-sm accept' %>
+                    <%= form_for( current_user.friend_requests_received_relationship.find_by(sender_id: sender.id), method: :delete ) do |f| %>
+                        <%= f.hidden_field :id, value: sender.id %>
+                        <%= f.submit "Ignore", class: 'btn btn-primary ignore-button' %>
+                  <% end %>
+                  </div>
+                <% end %>
+               </div>                
             </div>
           </div>
         <% end %>

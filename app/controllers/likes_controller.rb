@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   def create
   	@post = Post.find_by(id: params[:post_id])
-    @like = @post.likes.create(name: "#{current_user.name}", user_id: current_user.id)
+    @like = @post.likes.create(user_id: current_user.id)
     #debugger
   	if @like.save
   	  respond_to do |format|

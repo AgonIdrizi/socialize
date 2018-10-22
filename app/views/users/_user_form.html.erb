@@ -1,0 +1,19 @@
+<div id="user_form<%=user.id%>">
+	  <% if current_user.friends_relationship.find_by(user_id: user.id).blank? && user.friend_requests_sent_relationship.find_by(accepter_id: current_user.id).blank? && user.friend_requests_received_relationship.find_by(sender_id: current_user.id).blank? %>
+        <div class='add_friend<%=user.id%>'>
+  		  <%= render partial: 'users/add_friend',locals: {user:  user} %><br>
+        </div>
+  	  <% end %>
+      <% if  current_user.friend_requests_sent_relationship.find_by(accepter_id: user.id).present? && current_user.friends_relationship.find_by(user_id: user.id).blank? %>
+        <div class='requested<%=user.id%>'>
+        <%= render partial: 'users/requested' ,locals: {user: user} %>
+        </div>
+      <% end %>
+      <% if current_user.friend_requests_received_relationship.find_by(sender_id: user.id).present? && current_user.friends_relationship.find_by(user_id: user.id).blank? %>
+        <%= render partial: 'users/accept_ignore', locals: {user: user} %>
+      <% end %>
+  	
+       <% if current_user.friends_relationship.find_by(user_id: user.id).present? %>
+  		  <%= render partial: 'users/remove_friend_add_friend_form',locals: {user: user} %>
+  	    <% end %>
+  </div>

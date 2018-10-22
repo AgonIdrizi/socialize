@@ -1,1 +1,1 @@
-$("#user_form").html("<%= escape_javascript(render('users/remove_friend')) %>");
+$("#user_form<%=params[:user_id]%>").html("<%= escape_javascript(render('users/remove_friend',user: @user)) %>");

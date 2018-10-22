@@ -1,7 +1,7 @@
-<div id='add_friend_requested_from'>
+<div id='add_friend_requested_from<%=user.id%>'>
 <% if  current_user.friend_requests_sent_relationship.find_by(accepter_id: @user.id).present? %>
   <%= render partial: 'users/requested'  %>
 <% else %>
-  <%= render partial: 'users/add_friend'  %>
+  <%= render partial: 'users/add_friend' %>
 <% end %>
 </div>

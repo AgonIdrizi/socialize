@@ -1,2 +1,6 @@
 
   <div class="btn btn-static disabled">Requested</div>
+  <%= form_for( current_user.friend_requests_sent_relationship.find_by(accepter_id: user.id), method: :delete ,remote: true) do |f| %>
+    <%= f.hidden_field :id, value: user.id %>
+    <%= f.submit "Cancel Request", class: 'btn btn-primary add-button' %>
+  <% end %>

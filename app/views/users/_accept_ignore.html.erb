@@ -1,0 +1,9 @@
+<%= button_to "Accept",
+                    friendships_path, 
+                    :params => { :user_id => user.id },
+                    method: :post, remote: true,
+                    class: 'btn btn-primary btn-sm accept' %>
+<%= form_for( current_user.friend_requests_received_relationship.find_by(sender_id: user.id), method: :delete ,remote: true) do |f| %>
+    <%= f.hidden_field :id, value: user.id %>
+    <%= f.submit "Ignore", class: 'btn btn-primary ignore-button' %>
+  <% end %>

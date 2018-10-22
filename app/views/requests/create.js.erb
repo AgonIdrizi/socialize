@@ -1,1 +1,2 @@
-$("#user_form").html("<%= escape_javascript(render('users/requested')) %>");
+$("#user_form<%=params[:request][:accepter_id]%>").html("<%= escape_javascript(render('users/requested',user: @user)) %>");
+

@@ -1,12 +1,28 @@
-<div id="user_form">
-	<% if current_user.friends_relationship.find_by(user_id: @user.id).blank? && current_user.friend_requests_sent_relationship.find_by(accepter_id: @user.id).blank? %>
-  		<%= render partial: 'users/add_friend',locals: {user:  @user} %><br>
-  	<% end %>
-    <% if  current_user.friend_requests_sent_relationship.find_by(accepter_id: @user.id).present? && current_user.friends_relationship.find_by(user_id: @user.id).blank? %>
-      <%= render partial: 'users/requested' ,locals: {user:  @user} %>
+<div class="show-image">
+<%= image_tag(url_for(@user.image.variant(resize: "200x200"))) if @user.image.attached?%>
+</div>
+
+
+<% if @user == current_user %>
+  <div class='field'>
+    <%= form_with url: user_url(@user),method: :patch,local: true do |f| %>
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+      <%= f.submit 'Attach image'%> 
+  </div>
     <% end %>
-  	
-     <% if current_user.friends_relationship.find_by(user_id: @user.id).present? %>
-  		<%= render partial: 'users/remove_friend_add_friend_form',locals: {user:  @user} %>
-  	  <% end %>
+<% else %>
+  <%= render partial: 'users/user_form', locals:{user: @user} %>
+<% end %>
+<div class="container-post" >
+  <% @user.posts.each do |post| %>
+    <p>Posted by: <%= post.user.name %></br></p>
+    <%= post.body %></br>
+  
+    <%= render partial: 'posts/like_form',locals: {post: post} %>             
+  
+    <%= render partial: 'posts/form_comment', locals: {post: post} %>
+    <p>Comment:</p>
+    <%= render partial: 'posts/show_comment', locals: {post: post} %>
+  <% end %>
 </div>
