@@ -31,6 +31,8 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.image = URI.parse(auth.info.image)
     end
+  end
+  def set_param(auth)
     @paramauth = auth.to_h
   end
 
