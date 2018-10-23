@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   after_commit :add_default_cover, on: [:create, :update]
-
+  @paramauth
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.name = auth.info.name
