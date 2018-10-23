@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_123655) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "uid"
-    t.string "token"
+    t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
