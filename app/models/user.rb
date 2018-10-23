@@ -32,7 +32,7 @@ class User < ApplicationRecord
       user.image = URI.parse(auth.info.image)
     end
   end
-  def set_param(auth)
+  def self.set_param(auth)
     @paramauth = auth.to_h
   end
 
