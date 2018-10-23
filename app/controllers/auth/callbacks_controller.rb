@@ -2,7 +2,11 @@ class Auth::CallbacksController < ApplicationController
   
   def facebook
     user = User.create_from_provider_data(request.env['omniauth.auth'])
-    sign_in_and_redirect user, event: :authentication if user.persisted? 
+     if user.persisted? 
+      sign_in_and_redirect user
+    else
+      failure
+    end
   end
 
   def failure
