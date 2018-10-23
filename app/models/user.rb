@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  require 'open-uri'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,8 +30,14 @@ class User < ApplicationRecord
       user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      unless user.image.attached?
-        user.image.attach(URI.parse(auth.info.image))
+      if user.image.attached?
+      else
+        # open the link
+        downloaded_image = open(auth.info.image)
+
+        # upload via ActiveStorage
+        # be careful here! the type may be png or other type!
+        user.image.attach(io: downloaded_image, filename: 'image.jpg', content_type: downloaded_image.content_type)
       end
     end
   end
