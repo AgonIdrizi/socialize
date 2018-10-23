@@ -25,7 +25,7 @@ class User < ApplicationRecord
   after_commit :add_default_cover, on: [:create, :update]
 
   def self.create_from_provider_data(params)
-    user = find_or_create_by(email: params.info.email, uid: params.uid)
+    user = self.find_or_create_by(email: params.info.email, uid: params.uid)
     user.update({
       token: params.credentials.token,
       name:  params.info.name 
