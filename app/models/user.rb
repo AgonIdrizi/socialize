@@ -30,7 +30,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       unless user.image.attached?
-        user.image.attach(auth.info.image)
+        user.image.attach(URI.parse(auth.info.image)
       end
     end
   end
