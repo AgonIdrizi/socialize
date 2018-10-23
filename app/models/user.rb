@@ -23,24 +23,19 @@ class User < ApplicationRecord
   has_one_attached :image
 
   after_commit :add_default_cover, on: [:create, :update]
-  @paramauth
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.image = URI.parse(auth.info.image)
+      unless user.image.attached?
+        user.image.attach(auth.info.image)
+      end
     end
   end
-  def self.set_param(auth)
-    @paramauth = auth.to_h
-  end
-
-
-
   
-
-
+  
   private
     
 
