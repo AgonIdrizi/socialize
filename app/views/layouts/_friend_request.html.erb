@@ -34,15 +34,15 @@
                         <%= f.submit "Ignore", class: 'btn btn-primary ignore-button' %>
                   <% end %>
                   </div>
+                  <div class="dropdown-divider-special dropdown-divider"></div>
+                  <div class="showall">
+                    <%= link_to 'Show All', requests_path, class: "showall-text" %>
+                  </div>
                 <% end %>
                </div>                
             </div>
           </div>
         <% end %>
       <% end %>
-      <div class="dropdown-divider-special dropdown-divider"></div>
-      <div class="showall">
-        <%= link_to 'Show All', requests_path, class: "showall-text" %>
-      </div>
     </div>
 </li>
