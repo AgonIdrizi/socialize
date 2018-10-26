@@ -1,0 +1,6 @@
+<% comm.comments.each do |sub_comm| %><br>
+    <p>Sub comment:</p>
+    <%= sub_comm.user.name %></br>
+    <%= sub_comm.body %></br>
+    <%= link_to 'Reply', comment_comments_path(comm), method: :post %>
+  <% end %>

@@ -1,6 +1,12 @@
 class CommentsController < ApplicationController
 	before_action :authenticate_user!
-  before_action :find_commentable
+  before_action :find_commentable ,only: [:new,:create]
+  
+  def index
+    @post = Post.find_by(id: params[:post_id])
+    @comments = @post.comments
+  end
+
   def new
   	@comment = Comment.new
   end

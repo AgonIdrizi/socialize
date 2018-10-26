@@ -1,0 +1,14 @@
+<div id="activity-<%=post.id%>" class="activity">
+  <div class="activity-like">
+    <div class="info">
+      <div class="show-image">
+		<%= image_tag(url_for(user.image.variant(resize: "50x50"))) if user.image.attached?%>
+		<h4 class="name">Posted by: <%= link_to user.name, user_path(user.id) %></h4>
+	  </div>   
+    </div>
+    <div class="content">
+    <h4><small><%= post.body %> </small></h4>
+    <h4><small><i class="fa fa-calendar"></i> <%= post.created_at %></small></h4>
+    </div>
+  </div>
+</div>

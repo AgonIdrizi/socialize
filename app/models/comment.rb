@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-	belongs_to :commentable, polymorphic: true, dependent: :destroy
+	belongs_to :commentable, polymorphic: true,counter_cache: :likeable_count, dependent: :destroy
 	has_many :comments, as: :commentable
 	belongs_to :user, optional: true, dependent: :destroy
 
