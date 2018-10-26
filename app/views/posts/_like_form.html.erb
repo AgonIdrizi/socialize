@@ -1,5 +1,5 @@
 <div id='likes_form<%=post.id%>'>
-  <%= link_to "#{pluralize(post.likes.size,'like')}", post_likes_path(post) %></br>
+  <%= link_to "#{pluralize(post.likeable_count,'like')}", post_likes_path(post) %></br>
   <% if post.likes.where(likeable_id: post.id, user_id: current_user.id).present? %>
     <%= render partial: 'posts/unlike',locals: {post: post} %>
   <% else %>

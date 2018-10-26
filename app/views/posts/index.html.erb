@@ -1,14 +1,13 @@
-<% @friends.each do |friend| %>
-<% friend.posts.each do |post| %>
-  <p>Posted by:</p>
-  <%= post.user.name %></br>
-  <%= post.body %></br>
+<% @feed.each do |friend| %>
+  <% friend.posts.each do |post| %>
+    <p>Posted by:</p>
+    <%= post.user.name %></br>
+    <%= post.body %></br>
+    
+    <%= render partial: 'like_form',locals: {post: post} %>             
   
-  <%= render partial: 'like_form',locals: {post: post} %>             
-  
-  <%= render partial: 'form_comment', locals: {post: post} %>
-   <p>Comment:</p>
-  <%= render partial: 'show_comment', locals: {post: post} %>
-  
-<% end %>
+    <%= render partial: 'form_comment', locals: {post: post} %>
+    <p>Comment:</p>
+    <%= render partial: 'show_comment', locals: {post: post} %>
+  <% end %>
 <% end %>

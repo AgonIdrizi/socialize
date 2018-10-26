@@ -6,3 +6,4 @@
     <%= render partial: 'users/user_form', locals:{user: user} %>
   <% end %>
 <% end %>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails %>

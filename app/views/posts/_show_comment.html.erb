@@ -1,9 +1,9 @@
 <% post.comments.each do |comm| %></br>
   <% if comm.valid? %>
-  Created by:
+  Comment by:
     <%= comm.user.name %></br>
     <%= comm.body %>
   <% else %>
   <% end %>
-  <% render partial: 'posts/sub_comments', locals:{comm: comm} %>
+  <% #render partial: 'posts/sub_comments', locals:{comm: comm} %>
 <% end %></br>

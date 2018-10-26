@@ -12,7 +12,7 @@ User.create(name:'Philip Glass',
 
 99.times do |n|
   name = Faker::Name.name
-  email = "name-#{n+1}@socialize.org"
+  email = "#{name.split(" ").join}-#{n+1}@socialize.org"
   password = "password"
   User.create!(name: name,
   			   email: email,
@@ -42,7 +42,7 @@ friendship_friends.each do |friend|
 end
 
 # Create posts
-users = users[1..11]
+users = users[1..20]
 
 	
 users.each do |user|
@@ -53,7 +53,7 @@ users.each do |user|
 end
 users = users[3..13]
 # Create likes for posts
-posts = Post.all.take(30)
+posts = Post.all
 posts.each do |post|
   users.each do |user|
   	post.likes.create(user_id: user.id)
