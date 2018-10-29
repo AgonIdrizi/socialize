@@ -3,12 +3,14 @@ class UsersController < ApplicationController
   
 
   def index
-  	@users = User.all.paginate(:page => params[:page], :per_page => 30)
+  	@users = User.all.where.not(id: current_user.friends.pluck(:id)).
+    includes(image_attachment: [:blob]).paginate(:page => params[:page], :per_page => 32)
   end
 
   def show
   	@friendship = Friendship.new
   	@user = User.find_by(id: params[:id])
+    @posts = @user.posts.includes(:comments)
   
   end
 

@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   
   def index
     @post = Post.find_by(id: params[:post_id])
+    @user =@post.user
     @comments = @post.comments
   end
 
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
     
   	@comment = @commentable.comments.new(body: params[:comment][:body], user_id: current_user.id)
     if @comment.save
-      redirect_to posts_path
+      redirect_to post_path(@commentable)
     else
       render 'new'
     end

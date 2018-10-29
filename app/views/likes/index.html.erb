@@ -1,3 +1,5 @@
+<div class='container-likes'>
 <% @likes.each do |like| %>
   <%= link_to like.user.name, user_path(like.user.id) %></br>
 <% end %>
+</div>

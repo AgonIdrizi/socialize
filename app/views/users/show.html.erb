@@ -15,7 +15,7 @@
   <%= render partial: 'users/user_form', locals:{user: @user} %>
 <% end %>
 
-  <% @user.posts.each do |post| %>
+  <% @posts.each do |post| %>
   <div class="container-post" >
     <%= render partial: 'shared/post', locals: {post: post,user: @user} %>
   
@@ -23,7 +23,7 @@
   
     <%= render partial: 'posts/form_comment', locals: {post: post} %>
     <p>Comment:</p>
-    <%= render partial: 'posts/show_comment', locals: {post: post} %>
+    <%= render partial: 'posts/show_comment', locals: {comments: post.comments} %>
   </div>
   <% end %>
 

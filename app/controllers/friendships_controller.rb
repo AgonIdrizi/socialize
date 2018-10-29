@@ -1,5 +1,9 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
+
+  def index
+    @friends = current_user.friends.includes(image_attachment: [:blob]).paginate(:page => params[:page], :per_page => 30)
+  end
   def new
   	
   end

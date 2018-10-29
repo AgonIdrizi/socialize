@@ -3,11 +3,13 @@ class PostsController < ApplicationController
   def index
     
     @feed = show_all_posts_of_friends
+    @post = Post.new
   end
 
   def show
   	@post = Post.find(params[:id])
     @user = @post.user
+    @comments = @post.comments
   end
 
   def new
