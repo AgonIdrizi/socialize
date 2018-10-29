@@ -8,6 +8,7 @@
     </div>
     <div class="content">
     <h4><small><%= post.body %> </small></h4>
+    <h4><small><%= image_tag(url_for(post.image.variant(resize: "150x150"))) if post.image.attached?%></small></h4>
     <h4><small><i class="fa fa-calendar"></i> <%= post.created_at %></small></h4>
     </div>
   </div>

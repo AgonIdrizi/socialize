@@ -7,8 +7,8 @@
   <div class='field'>
     <%= form_with url: user_url(@user),method: :patch,local: true do |f| %>
       <%= f.label :image %>
-      <%= f.file_field :image %>
-      <%= f.submit 'Attach image'%> 
+      <%= f.file_field :image,class: 'btn-default btn-file' %>
+      <%= f.submit 'Attach image',class: 'btn-default btn-file'%> 
   </div>
     <% end %>
 <% else %>
