@@ -1,6 +1,9 @@
 <div class="container-post" >
   <%= render partial:'post_form',locals: {post: @post} %>
 </div>
+<div>
+<h2><i class="fa fa-newspaper-o"></i>NEWSFEED</h2>
+</div>
 <% @feed.each do |friend| %>
   <% friend.posts.each do |post| %>
   <div class="container-post" >
