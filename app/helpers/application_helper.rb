@@ -1,4 +1,5 @@
 module ApplicationHelper
-	include FriendshipsHelper
-	include UsersHelper
+  include FriendshipsHelper
+  include UsersHelper
+
 end

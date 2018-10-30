@@ -26,6 +26,8 @@ class User < ApplicationRecord
   after_commit :add_default_cover, on: [:create, :update]
   after_create :send_welcome_mail
 
+  validates :name,presence: true
+
   def send_welcome_mail
     UserMailer.welcome_email(self).deliver
   end
