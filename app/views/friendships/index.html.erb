@@ -1,6 +1,13 @@
-<% @friends.each do |friend| %>
-  <%= render partial: 'users/image_thumbnail', locals:{user: friend}%>
-  <%= friend.name %></br>
-  <%= render partial: 'users/remove_friend', locals: {user: friend}%>
-<% end %>
-<%= will_paginate @friends, renderer: BootstrapPagination::Rails %>
+<div class= 'container-users'>
+  <% @friends.each do |friend| %>
+    
+  	<div class= 'user-show-thumb'>
+      <%= render partial: 'users/image_thumbnail', locals:{user: friend}%>
+      <%= friend.name %>
+      <%= render partial: 'users/user_form', locals:{user: friend} %>
+    </div>
+  <% end %>
+</div>
+<div class='pagination'>
+  <%= will_paginate @friends, renderer: BootstrapPagination::Rails %>
+</div>

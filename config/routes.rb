@@ -12,10 +12,22 @@ Rails.application.routes.draw do
   devise_for :users,:skip => [:registrations], controllers: { omniauth_callbacks: 'auth/callbacks'}
   
   devise_scope :user do
-    get "user/sign_up", to: "users/registrations#new", as: :new_user_registration
-    post "user/sign_up", to: "users/registrations#create", as: :user_registrations
-    get 'user/edit' ,to: 'users/registrations#edit', as: :edit_user_registration
-    put 'user/edit' ,to: 'users/registrations#update', as:  :user_registration
+    put    '/account',  to: 'devise/registrations#update'
+  delete '/account',  to: 'devise/registrations#destroy'
+  post   '/account',  to: 'devise/registrations#create'
+  get    '/register', to: 'devise/registrations#new',    as: :new_user_registration
+  get    '/account/:id',  to: 'devise/registrations#edit',   as: :edit_user_registration
+  patch  '/account',  to: 'devise/registrations#update', as: :user_registration
+  get    '/account/cancel', to: 'devise/registrations#cancel', as: :cancel_user_registration# passwords
+
+
+
+
+    #get "user/sign_up", to: "users/registrations#new", as: :new_user_registration
+    #post "user/sign_up", to: "users/registrations#create", as: :user_registration
+    #get 'user/edit/:id' ,to: 'users/registrations#edit', as: :edit_user_registration
+    #put 'user/update', to: 'users/registrations#update', as: :user_registrations
+    
   end
 
   resources :users, only: [:index,:show,:edit,:update]
