@@ -24,13 +24,13 @@ class User < ApplicationRecord
   has_one_attached :image
 
   after_commit :add_default_cover, on: [:create, :update]
-  #after_create :send_welcome_mail
+  after_create :send_welcome_mail
 
   validates :name,presence: true
 
-  #def send_welcome_mail
-   # UserMailer.welcome_email(self).deliver
-  #end
+  def send_welcome_mail
+    UserMailer.welcome_email(self).deliver
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
