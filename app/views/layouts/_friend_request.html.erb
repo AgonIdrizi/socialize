@@ -14,15 +14,17 @@
       <% else %>
         <% current_user.friend_requests_received.limit(10).each do |sender| %>
           <div class="dropdown-item-friend-request dropdown-item">
-            <div class="sender-name">
-              <%= link_to sender.name , user_path(sender) %>
-            </div>
+            
+              
+            
             <div class="request-dropdown-button-wrapper">
               <div class="request-dropdown-ignore dropdown-btn">
                  <% if current_user.friend_requests_received_relationship.find_by(sender_id: sender.id).present? && current_user.friends_relationship.find_by(user_id: sender.id).blank? %>
                     <div class="show-image">
                       <%= image_tag(url_for(sender.image.variant(resize: "50x50"))) if sender.image.attached?%>
+                      <%= link_to sender.name , user_path(sender) %>
                     </div>
+                    
                     <div class="accept-ignore">
                     <%= button_to "Accept",
                                           friendships_path, 
@@ -31,7 +33,7 @@
                                           class: 'btn btn-primary btn-sm accept' %>
                     <%= form_for( current_user.friend_requests_received_relationship.find_by(sender_id: sender.id), method: :delete ) do |f| %>
                         <%= f.hidden_field :id, value: sender.id %>
-                        <%= f.submit "Ignore", class: 'btn btn-primary ignore-button' %>
+                        <%= f.submit "Ignore", class: 'btn btn-primary btn-sm ignore-button' %>
                   <% end %>
                   </div>
                   <div class="dropdown-divider-special dropdown-divider"></div>

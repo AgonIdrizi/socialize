@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
   get 'about', to: 'static_pages#about'
   get 'likes/index'
   get 'friendships/new'
@@ -8,6 +10,9 @@ Rails.application.routes.draw do
   get 'comments/new'
   get 'comments/create'
   root to: 'posts#index'
+
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
   devise_for :users,:skip => [:registrations], controllers: { omniauth_callbacks: 'auth/callbacks'}
   

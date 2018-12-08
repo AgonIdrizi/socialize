@@ -1,11 +1,13 @@
 <div class= 'container-users'>
   <% @friends.each do |friend| %>
-    
+    <% if friend == current_user %>
+    <% else %>
   	<div class= 'user-show-thumb'>
       <%= render partial: 'users/image_thumbnail', locals:{user: friend}%>
       <%= friend.name %>
       <%= render partial: 'users/user_form', locals:{user: friend} %>
     </div>
+    <% end %>
   <% end %>
 </div>
 <div class='pagination'>
